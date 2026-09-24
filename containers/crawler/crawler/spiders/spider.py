@@ -376,6 +376,8 @@ class HtmlSpider(scrapy.Spider):
                 title=None,
                 hreflang_count=0,
                 has_json_ld=False,
+                requested_url=source_url,
+                requested_domain_id=track_domain_id,
                 **self._response_metadata(response),
             )
             return
@@ -414,6 +416,8 @@ class HtmlSpider(scrapy.Spider):
             title=title,
             hreflang_count=hreflang_count,
             has_json_ld=has_json_ld,
+            requested_url=source_url,
+            requested_domain_id=track_domain_id,
             **self._response_metadata(response),
         )
 
@@ -438,6 +442,8 @@ class HtmlSpider(scrapy.Spider):
             cache_control=None,
             is_redirect=bool(failure.request.meta.get("redirect_times")),
             redirect_hop_count=int(failure.request.meta.get("redirect_times") or 0),
+            requested_url=source_url,
+            requested_domain_id=track_domain_id,
         )
 
         status = None
